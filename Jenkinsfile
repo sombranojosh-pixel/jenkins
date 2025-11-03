@@ -1,11 +1,11 @@
 pipeline {
     agent any
-    // triggers{
-    //     cron('* * * * *')
-    // }
+    triggers{
+        cron('* * * * *')
+    }
     parameters{
-        string(description: "Enter subject", name: "enterSubject")
-        string(description: "Enter message", name: "enterMessage")
+        string(default: "Scheduled send", description: "Enter subject", name: "enterSubject")
+        string(default: "Pre-made text", description: "Enter message", name: "enterMessage")
     }
     environment{
         subject = "${params.enterSubject}"
@@ -45,6 +45,7 @@ EOF
         }
     }
 }
+
 
 
 

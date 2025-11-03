@@ -38,13 +38,14 @@ EOF
 
                         echo "Subject: $subject" > mail.txt
                         echo "$message" >> mail.txt
-                        /usr/bin/msmtp -a gmail sombranojosh@gmail.com < mail.txt
+                        /usr/bin/msmtp -a gmail $email < mail.txt
                     '''
                 }
             }
         }
     }
 }
+
 
 
 

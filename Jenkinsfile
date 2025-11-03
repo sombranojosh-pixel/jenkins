@@ -1,13 +1,36 @@
 pipeline {
     agent any
+
     stages {
-        stage('Send Gmail') {
+        stage('Send Gmail via msmtp') {
             steps {
-                sh '''
-                    echo "Subject: Jenkins Test Email" > mail.txt
-                    echo "Hello from Jenkins Pipeline using msmtp!" >> mail.txt
-                    msmtp -a gmail sombranojosh@gmail.com < mail.txt
-                '''
+                withCredentials([usernamePassword(credentialsId: 'gmail-creds', usernameVariable: 'SMTP_USER', passwordVariable: 'SMTP_PASS')]) {
+                    sh '''
+                        # Create a temporary msmtp config file
+                        cat > ~/.msmtprc <<EOF
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account gmail
+host smtp.gmail.com
+port 587
+from grapejuiceblues2@gmail.com
+user grapejuiceblues2@gmail.com
+password uump dnyt daiv hbjw
+
+account default : gmail
+EOF
+
+                        chmod 600 ~/.msmtprc
+
+                        # Send the email
+                        echo "Subject: Jenkins Test Email" > mail.txt
+                        echo "This is a test email from Jenkins Pipeline using msmtp credentials." >> mail.txt
+                        /usr/bin/msmtp -a gmail sombranojosh@gmail.com < mail.txt
+                    '''
+                }
             }
         }
     }

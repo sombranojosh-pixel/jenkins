@@ -36,7 +36,7 @@ EOF
                         chmod 600 ~/.msmtprc
 
                         # Send the email
-                        echo "$subject" > mail.txt
+                        echo "Subject: $subject" > mail.txt
                         echo "$message" >> mail.txt
                         /usr/bin/msmtp -a gmail sombranojosh@gmail.com < mail.txt
                     '''
@@ -45,6 +45,7 @@ EOF
         }
     }
 }
+
 
 
 

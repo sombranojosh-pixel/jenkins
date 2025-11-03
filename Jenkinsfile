@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Send Gmail via msmtp') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'gmail-creds', usernameVariable: 'SMTP_USER', passwordVariable: 'SMTP_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'gmail-smtp', usernameVariable: 'SMTP_USER', passwordVariable: 'SMTP_PASS')]) {
                     sh '''
                         # Create a temporary msmtp config file
                         cat > ~/.msmtprc <<EOF
@@ -35,3 +35,4 @@ EOF
         }
     }
 }
+

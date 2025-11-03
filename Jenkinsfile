@@ -4,9 +4,11 @@ pipeline {
     //     cron('* * * * *')
     // }
     parameters{
+        string(description: "Enter subject", name: "enterSubject")
         string(description: "Enter message", name: "enterMessage")
     }
     environment{
+        subject = "${params.enterSubject}"
         message = "${params.enterMessage}"
     }
     stages {
@@ -34,7 +36,7 @@ EOF
                         chmod 600 ~/.msmtprc
 
                         # Send the email
-                        echo "Subject: Jenkins Test Email" > mail.txt
+                        echo "$subject" > mail.txt
                         echo "$message" >> mail.txt
                         /usr/bin/msmtp -a gmail sombranojosh@gmail.com < mail.txt
                     '''
@@ -43,6 +45,7 @@ EOF
         }
     }
 }
+
 
 
 

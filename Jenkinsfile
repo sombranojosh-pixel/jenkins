@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    triggers{
+        cron(* * * * *)
+    }
     stages {
         stage('Send Gmail via msmtp') {
             steps {
@@ -35,4 +37,5 @@ EOF
         }
     }
 }
+
 

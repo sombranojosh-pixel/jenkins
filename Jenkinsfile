@@ -26,9 +26,9 @@ tls_trust_file /etc/ssl/certs/ca-certificates.crt
 account gmail
 host smtp.gmail.com
 port 587
-from grapejuiceblues2@gmail.com
-user grapejuiceblues2@gmail.com
-password uump dnyt daiv hbjw
+from ${SMTP_USER}
+user ${SMTP_USER}
+password ${SMTP_PASS}
 
 account default : gmail
 EOF
@@ -45,6 +45,7 @@ EOF
         }
     }
 }
+
 
 
 

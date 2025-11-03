@@ -3,6 +3,9 @@ pipeline {
     // triggers{
     //     cron('* * * * *')
     // }
+    parameters{
+        string(description: "Enter message", name: "enterMessage")
+    }
     stages {
         stage('Mail Sender') {
             steps {
@@ -29,7 +32,7 @@ EOF
 
                         # Send the email
                         echo "Subject: Jenkins Test Email" > mail.txt
-                        echo "This is a test email from Jenkins Pipeline using msmtp credentials." >> mail.txt
+                        echo "${params.enterMessage}" >> mail.txt
                         /usr/bin/msmtp -a gmail sombranojosh@gmail.com < mail.txt
                     '''
                 }
@@ -37,6 +40,7 @@ EOF
         }
     }
 }
+
 
 
 

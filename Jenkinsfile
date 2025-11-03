@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    triggers{
-        cron('* * * * *')
-    }
+    // triggers{
+    //     cron('* * * * *')
+    // }
     stages {
-        stage('Send Gmail via msmtp') {
+        stage('Mail Sender') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'gmail-smtp', usernameVariable: 'SMTP_USER', passwordVariable: 'SMTP_PASS')]) {
                     sh '''
@@ -37,6 +37,7 @@ EOF
         }
     }
 }
+
 
 
 

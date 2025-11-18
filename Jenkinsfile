@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    triggers{
-    	cron('* * * * *')
-     }
+   // triggers{
+   //	cron('* * * * *')
+   //  }
     parameters{
         string(defaultValue: "Scheduled send", description: "Enter subject", name: "enterSubject")
         string(defaultValue: "Pre-made text", description: "Enter message", name: "enterMessage")
